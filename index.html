@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJ SUMO REMIX</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#000;
+color:#fff;
+text-align:center;
+}
+
+header{
+padding:20px;
+background:#111;
+box-shadow:0 0 20px cyan;
+}
+
+.logo{
+font-size:40px;
+font-weight:bold;
+color:cyan;
+text-shadow:0 0 20px cyan;
+}
+
+.player{
+width:90%;
+max-width:700px;
+margin:20px auto;
+padding:20px;
+background:#111;
+border-radius:20px;
+box-shadow:0 0 20px rgba(0,255,255,.4);
+}
+
+.album{
+width:220px;
+height:220px;
+border-radius:50%;
+object-fit:cover;
+border:4px solid cyan;
+animation:spin 10s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+audio{
+width:100%;
+margin:15px 0;
+}
+
+button{
+padding:10px 20px;
+margin:5px;
+border:none;
+border-radius:10px;
+background:cyan;
+cursor:pointer;
+font-weight:bold;
+}
+
+.song{
+padding:10px;
+margin:8px;
+background:#222;
+border-radius:10px;
+cursor:pointer;
+}
+
+.song:hover{
+background:#333;
+}
+
+.youtube{
+display:inline-block;
+margin-top:15px;
+padding:12px 20px;
+background:red;
+color:white;
+text-decoration:none;
+border-radius:10px;
+}
+
+.footer{
+padding:20px;
+color:#aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">DJ SUMO REMIX</div>
+<p>FROM ARAMBAGH TOWN SE</p>
+</header>
+
+<div class="player">
+
+<img src="album.jpg" class="album" alt="DJ SUMO REMIX">
+
+<h2 id="title">Track 1</h2>
+
+<audio id="audio" controls src="song1.mp3"></audio>
+
+<div>
+<button onclick="prevSong()">⏮ Prev</button>
+<button onclick="nextSong()">⏭ Next</button>
+</div>
+
+<div class="song" onclick="playSong(0)">Track 1</div>
+<div class="song" onclick="playSong(1)">Track 2</div>
+<div class="song" onclick="playSong(2)">Track 3</div>
+
+<a class="youtube"
+href="https://www.youtube.com/@THEMASTEROFSUMOREMIX"
+target="_blank">
+▶ Subscribe YouTube
+</a>
+
+</div>
+
+<div class="footer">
+© DJ SUMO REMIX | ARAMBAGH TOWN SE
+</div>
+
+<script>
+const songs=[
+"song1.mp3",
+"song2.mp3",
+"song3.mp3"
+];
+
+const titles=[
+"Track 1",
+"Track 2",
+"Track 3"
+];
+
+let current=0;
+
+const audio=document.getElementById("audio");
+const title=document.getElementById("title");
+
+function playSong(index){
+current=index;
+audio.src=songs[current];
+title.innerText=titles[current];
+audio.play();
+}
+
+function nextSong(){
+current=(current+1)%songs.length;
+playSong(current);
+}
+
+function prevSong(){
+current=(current-1+songs.length)%songs.length;
+playSong(current);
+}
+
+audio.addEventListener("ended",nextSong);
+</script>
+
+</body>
+</html>
